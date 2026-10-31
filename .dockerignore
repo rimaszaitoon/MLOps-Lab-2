@@ -1,0 +1,13 @@
+.venv/
+.venv_old/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.git/
+.gitignore
+*.pyc
+*.ipynb
+*.csv
+pain_log.txt
+pain_log_template.txt
+tests/
