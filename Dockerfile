@@ -13,6 +13,11 @@ FROM python:3.14.4-slim-bookworm AS runtime
 
 WORKDIR /app
 
+# Update Debian security packages
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy installed dependencies from builder
 COPY --from=builder /install /usr/local
 
