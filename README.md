@@ -32,8 +32,9 @@ The model uses customer information including tenure, monthly charges, support c
 Pull and run the published image:
 
 ```
-docker run --rm -p 8000:8000 ghcr.io/rimaszaitoon/mlops-lab-2:02dba0b3e51f90491ed177c36a892202f315ffa1
+docker run --rm -p 8000:8000 ghcr.io/rimaszaitoon/mlops-lab-2:60408986aa879c49a35e1ad693e981d1a778c8d1
 ```
+
 
 The API will be available at:
 
@@ -121,7 +122,8 @@ ghcr.io/rimaszaitoon/mlops-lab-2
 **Published tag:**
 
 ```
-02dba0b3e51f90491ed177c36a892202f315ffa1
+60408986aa879c49a35e1ad693e981d1a778c8d1
+
 ```
 
 ## Repository
