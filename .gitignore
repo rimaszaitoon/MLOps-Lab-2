@@ -6,3 +6,16 @@ __pycache__/
 *.pyc
 .env
 pain_log.txt
+
+# Lab 3 - MLflow artifacts and reports
+.ruff_cache/
+models/
+artifacts/*
+!artifacts/.gitkeep
+!artifacts/champion.json
+!artifacts/metadata.json
+!artifacts/model.joblib
+reports/
+mlflow.db
+mlruns/
+mlartifacts/
