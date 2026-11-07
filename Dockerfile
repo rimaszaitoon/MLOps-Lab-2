@@ -16,6 +16,13 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt \
 FROM python:3.14.10-slim-trixie AS runtime
 
 WORKDIR /app
+# Image traceability
+
+ARG GIT_SHA=unknown
+ARG IMAGE_TAG=unknown
+
+ENV GIT_SHA=${GIT_SHA}
+ENV IMAGE_TAG=${IMAGE_TAG}
 
 # Update Debian security packages
 RUN apt-get update \
@@ -42,7 +49,9 @@ RUN groupadd --gid 10001 appuser \
 
 # Copy application and trained model
 COPY --chown=appuser:appuser src/ ./src/
-COPY --chown=appuser:appuser model.joblib ./model.joblib
+COPY --chown=appuser:appuser artifacts/model.joblib ./model.joblib
+COPY --chown=appuser:appuser artifacts/metadata.json ./metadata.json
+
 
 # Run as non-root user
 USER appuser

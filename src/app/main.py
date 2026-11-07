@@ -1,3 +1,5 @@
+import json
+import os
 from pathlib import Path
 from typing import Literal
 
@@ -9,7 +11,13 @@ from pydantic import BaseModel, ConfigDict, Field
 # Project paths
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODEL_PATH = PROJECT_ROOT / "model.joblib"
+METADATA_PATH = PROJECT_ROOT / "artifacts" / "metadata.json"
 
+if not METADATA_PATH.exists():
+    METADATA_PATH = PROJECT_ROOT / "metadata.json"
+
+with open(METADATA_PATH, "r") as f:
+    model_metadata = json.load(f)
 
 # Features expected by the model
 FEATURES = [
@@ -64,6 +72,12 @@ def health():
     return {
         "status": "ok",
         "model_loaded": model is not None,
+        "model_version": model_metadata["model_version"],
+        "model": model_metadata["model"],
+        "mlflow_run_id": model_metadata["mlflow_run_id"],
+        "git_sha": os.getenv("GIT_SHA", "unknown"),
+        "image_tag": os.getenv("IMAGE_TAG", "unknown"),
+
     }
 
 
@@ -84,3 +98,4 @@ def predict(customer: CustomerInput):
     return {
         "churn_probability": round(probability, 3)
     }
+
